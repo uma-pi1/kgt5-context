@@ -4,7 +4,6 @@ This is the repository for the RepL4NLP workshop 2023 paper ["Friendly Neighbors
 
 It is a simple extension of the verbalization of KGT5 with the 1-hop neighborhood of the query entity as context.
 
-**NOTE: preprocessed datasets will be provided soon**
 
 ## Table of contents
 1. [Method](#method)
@@ -55,6 +54,19 @@ conda create -n kgt5 python==3.10
 conda activate kgt5
 pip install -r requirements.txt
 ```
+
+### Download Data
+
+Note: the dataset is called wikidata5m_v3 as this is the final version of the dataset published with the third arxiv version of the Kepler paper.
+The second arxiv version had a slightly different split.
+
+```
+mkdir data
+cd data
+curl -O https://web.informatik.uni-mannheim.de/pi1/kge-datasets/wikidata5m_v3.tar.gz
+tar -zxvf wikidata5m_v3.tar.gz
+```
+
 
 ## Reproduction
 ### Training
