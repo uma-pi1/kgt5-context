@@ -121,7 +121,7 @@ python -m eval_legacy_huggingface.py t5-small-wd5mv3-adafactor_82ep --v1 --is_le
 git lfs install
 git clone https://huggingface.co/AdrianKs/kgt5-descriptions-wikidata5m
 
-python -m eval.py AdrianKs/kgt5-descriptions-wikidata5m -c huggingface
+python -m eval.py kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descriptions-wikidata5m/config.yaml
 ```
 
 #### KGT5-context
