@@ -1,11 +1,10 @@
 import torch
 import argparse
 import pytorch_lightning as pl
-from main_kgt5 import process_deprecated
+from main import process_deprecated
 from pytorch_lightning.loggers import WandbLogger
 from custom_data import NbhoodDataModule
 from kgt5_model import KGT5_Model
-#from kgt5_scoring_model import KGT5_Model
 from omegaconf import DictConfig, OmegaConf, open_dict
 
 
@@ -19,13 +18,16 @@ def run(checkpoint_path: str, config_path: str, split: str) -> None:
     print("output written to", config.output_dir)
     config = process_deprecated(config)
 
-    # dm = Wikidata5MModule(batch_size=256)
     dm = NbhoodDataModule(config=config)
 
-    # model = KGT5_Model(tokenizer=tokenizer)
-    model = KGT5_Model.load_from_checkpoint(
-        checkpoint_path, config=config, data_module=dm
-    )
+    if checkpoint_path.endswith("pytorch_model.bin"): # huggingface model
+        checkpoint_path = checkpoint_path.split("pytorch_model.bin")[0]
+        model = KGT5_Model(config, data_module=dm)
+        model = model.from_pretrained(checkpoint_path, local_files_only=True, config=config, data_module=dm)
+    else:
+        model = KGT5_Model.load_from_checkpoint(
+            checkpoint_path, config=config, data_module=dm
+        )
 
     train_options = {
         'accelerator': config.train.accelerator,
@@ -40,9 +42,9 @@ def run(checkpoint_path: str, config_path: str, split: str) -> None:
     trainer = pl.Trainer(**train_options, )  # limit_train_batches=1)
 
     if split=="test":
-        trainer.test(model, ckpt_path=checkpoint_path, datamodule=dm)
+        trainer.test(model, datamodule=dm)
     else:
-        trainer.validate(model, ckpt_path=checkpoint_path, datamodule=dm)
+        trainer.validate(model, datamodule=dm)
 
 
 if __name__ == '__main__':

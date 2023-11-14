@@ -3,9 +3,10 @@ from transformers import T5Config, T5ForConditionalGeneration, Adafactor
 import numpy as np
 import torch
 from collections import defaultdict
+from huggingface_hub import PyTorchModelHubMixin
 
 
-class KGT5_Model(pl.LightningModule):
+class KGT5_Model(pl.LightningModule, PyTorchModelHubMixin):
     def __init__(self,
                  config,
                  data_module,

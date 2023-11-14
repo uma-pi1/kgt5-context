@@ -94,8 +94,55 @@ python main.py dataset.name=wikidata5m_v3 dataset.v1=True
 ### Evaluation
 To evaluate a trained model run
 
+Note: the trained model is stored in the automatically generated output folder. The config file is placed in the `.hydra` folder in the same output folder.
+
 ```
 python eval.py --config <path to config> --model <path to trained model>
+```
+
+### Checkpoints
+For reproduction of presented results we provide some checkpoints.
+
+#### KGT5
+- original KGT5 using mentions only
+
+```
+# Make sure you have git-lfs installed (https://git-lfs.com)
+git lfs install
+git clone https://huggingface.co/apoorvumang/t5-small-wd5mv3-adafactor_82ep
+
+python -m eval_legacy_huggingface.py t5-small-wd5mv3-adafactor_82ep --v1 --is_legacy
+```
+
+#### KGT5 with descriptions
+
+```
+# Make sure you have git-lfs installed (https://git-lfs.com)
+git lfs install
+git clone https://huggingface.co/AdrianKs/kgt5-descriptions-wikidata5m
+
+python -m eval.py AdrianKs/kgt5-descriptions-wikidata5m -c huggingface
+```
+
+#### KGT5-context
+- mentions only
+
+```
+# Make sure you have git-lfs installed (https://git-lfs.com)
+git lfs install
+git clone https://huggingface.co/apoorvumang/kgt5v2-small-wikidata5m
+
+python eval_legacy_huggingface.py -m kgt5v2-small-wikidata5m --is_legacy
+```
+
+#### KGT5-context with descriptions
+
+```
+# Make sure you have git-lfs installed (https://git-lfs.com)
+git lfs install
+git clone https://huggingface.co/AdrianKs/kgt5-context-descriptions-wikidata5m
+
+python eval.py -m kgt5-context-descriptions-wikidata5m/pytorch_model.bin -c kgt5-context-descriptions-wikidata5m/config.yaml
 ```
 
 
@@ -109,6 +156,20 @@ Note, output directory and wandb project name are defined in the file `conf/conf
 ## KGT5 for QA
 Unfortunately, QA is not supported by this repository. 
 For QA, please visit the original [KGT5 repository](https://github.com/apoorvumang/kgt5).
+
+## How to cite
+If you use the provided code or refer to the results presented in the paper, please cite.
+
+
+```
+@inproceedings{kochsiek2023friendly,
+    title={Friendly Neighbors: Contextualized Sequence-to-Sequence Link Prediction},
+    author={Kochsiek, Adrian and Saxena, Apoorv and Nair, Inderjeet and Gemulla, Rainer},
+    booktitle={Proceedings of the 8th Workshop on Representation Learning for NLP},
+    year={2023}
+}
+
+```
 
 
 
