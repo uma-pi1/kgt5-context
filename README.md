@@ -130,9 +130,9 @@ python -m eval.py kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descrip
 ```
 # Make sure you have git-lfs installed (https://git-lfs.com)
 git lfs install
-git clone https://huggingface.co/apoorvumang/kgt5v2-small-wikidata5m
+git clone https://huggingface.co/AdrianKs/kgt5-context-wikidata5m
 
-python eval_legacy_huggingface.py -m kgt5v2-small-wikidata5m --is_legacy
+python eval.py -m kgt5-context-wikidata5m/pytorch_model.bin -c kgt5-context-wikidata5m/config.yaml
 ```
 
 #### KGT5-context with descriptions
