@@ -1,6 +1,6 @@
 # KGT5-context
 
-This is the repository for the RepL4NLP workshop 2023 paper ["Friendly Neighbors: Contextualized Sequence-to-Sequence Link Prediction"](https://arxiv.org/abs/2305.13059).
+This is the repository for the RepL4NLP@ACL 2023 paper ["Friendly Neighbors: Contextualized Sequence-to-Sequence Link Prediction"](https://arxiv.org/abs/2305.13059).
 
 It is a simple extension of the verbalization of KGT5 with the 1-hop neighborhood of the query entity as context.
 
