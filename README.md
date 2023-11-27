@@ -1,3 +1,5 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/friendly-neighbors-contextualized-sequence-to/link-prediction-on-wikidata5m)](https://paperswithcode.com/sota/link-prediction-on-wikidata5m?p=friendly-neighbors-contextualized-sequence-to)
+
 # KGT5-context
 
 This is the repository for the RepL4NLP@ACL 2023 paper ["Friendly Neighbors: Contextualized Sequence-to-Sequence Link Prediction"](https://arxiv.org/abs/2305.13059).
