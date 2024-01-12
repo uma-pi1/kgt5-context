@@ -24,6 +24,9 @@ class KGCDataset(Dataset):
         self.ent_aliases, self.rel_aliases = self.get_ent_rel_alias_dicts(
             self.dataset_name
         )
+        self.entity_inverse_alias_dict = dict(
+            zip(self.ent_aliases.values(), self.ent_aliases.keys())
+        )
         self.num_entities = len(self.ent_aliases)
         self.num_relations = len(self.rel_aliases)
         print("loading triples")

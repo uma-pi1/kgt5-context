@@ -117,6 +117,8 @@ class KGT5_Model(pl.LightningModule, PyTorchModelHubMixin):
         for p, score in zip(unique_preds.tolist(), relevant_scores.tolist()):
             if p in true_answers:
                 continue
+            if self.dataset.entity_inverse_alias_dict.get(p, None) is None:
+                continue
             if score > true_score:
                 rank += 1
             if score == true_score:
