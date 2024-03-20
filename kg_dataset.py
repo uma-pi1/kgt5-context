@@ -309,14 +309,17 @@ class Hop1Index:
         self.key_to_start[keys] = self.values_offset[:-1]
         self.key_to_end = np.full([num_entities,], -1)
         self.key_to_end[keys] = self.values_offset[1:]
+        self.triples = self.triples[:, [1, 2]]
 
     def __getitem__(self, item):
         start = self.key_to_start[item]
         end = self.key_to_end[item]
-        context = self.triples[start:end, [1, 2]]
+        context = self.triples[start:end]
         if self.shuffle:
-            context = np.copy(context)
-            np.random.shuffle(context)
+            context_size = len(context)
+            sampled_ids = random.sample(range(context_size),
+                                        min(context_size, self.max_context_size))
+            context = context[sampled_ids]
         if end - start > self.max_context_size:
             context = context[:self.max_context_size]
         return context
