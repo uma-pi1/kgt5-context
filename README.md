@@ -113,7 +113,7 @@ For reproduction of presented results we provide some checkpoints.
 git lfs install
 git clone https://huggingface.co/apoorvumang/t5-small-wd5mv3-adafactor_82ep
 
-python -m eval_legacy_huggingface.py t5-small-wd5mv3-adafactor_82ep --v1 --is_legacy
+python eval_legacy_huggingface.py -m t5-small-wd5mv3-adafactor_82ep --v1 --is_legacy
 ```
 
 #### KGT5 with descriptions
@@ -123,7 +123,7 @@ python -m eval_legacy_huggingface.py t5-small-wd5mv3-adafactor_82ep --v1 --is_le
 git lfs install
 git clone https://huggingface.co/AdrianKs/kgt5-descriptions-wikidata5m
 
-python -m eval.py kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descriptions-wikidata5m/config.yaml
+python eval.py -m kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descriptions-wikidata5m/config.yaml
 ```
 
 #### KGT5-context
