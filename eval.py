@@ -1,6 +1,8 @@
+import os
 import torch
 import argparse
 import pytorch_lightning as pl
+from safetensors import safe_open
 from main import process_deprecated
 from pytorch_lightning.loggers import WandbLogger
 from custom_data import NbhoodDataModule
@@ -20,8 +22,15 @@ def run(checkpoint_path: str, config_path: str, split: str) -> None:
 
     dm = NbhoodDataModule(config=config)
 
-    if checkpoint_path.endswith("pytorch_model.bin"): # huggingface model
-        checkpoint_path = checkpoint_path.split("pytorch_model.bin")[0]
+    if checkpoint_path.endswith("model.safetensors"): # huggingface model with safetensors
+        model = KGT5_Model(config, data_module=dm)
+        tensors = {}
+        with safe_open(checkpoint_path, framework="pt") as f:
+            for k in f.keys():
+                tensors[k] = f.get_tensor(k)
+            model.load_state_dict(tensors, strict=False) # strict false due to shared weights in T5
+    elif checkpoint_path.endswith("pytorch_model.bin"): # huggingface model
+        checkpoint_path = os.path.dirname(checkpoint_path)
         model = KGT5_Model(config, data_module=dm)
         model = model.from_pretrained(checkpoint_path, local_files_only=True, config=config, data_module=dm)
     else:
