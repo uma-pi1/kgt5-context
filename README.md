@@ -123,7 +123,7 @@ python eval_legacy_huggingface.py -m t5-small-wd5mv3-adafactor_82ep --v1 --is_le
 git lfs install
 git clone https://huggingface.co/AdrianKs/kgt5-descriptions-wikidata5m
 
-python eval.py -m kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descriptions-wikidata5m/config.yaml
+python eval.py -m kgt5-descriptions-wikidata5m/model.safetensors -c kgt5-descriptions-wikidata5m/config.yaml
 ```
 
 #### KGT5-context
@@ -134,7 +134,7 @@ python eval.py -m kgt5-descriptions-wikidata5m/pytorch_model.bin -c kgt5-descrip
 git lfs install
 git clone https://huggingface.co/AdrianKs/kgt5-context-wikidata5m
 
-python eval.py -m kgt5-context-wikidata5m/pytorch_model.bin -c kgt5-context-wikidata5m/config.yaml
+python eval.py -m kgt5-context-wikidata5m/model.safetensors -c kgt5-context-wikidata5m/config.yaml
 ```
 
 #### KGT5-context with descriptions
@@ -144,7 +144,7 @@ python eval.py -m kgt5-context-wikidata5m/pytorch_model.bin -c kgt5-context-wiki
 git lfs install
 git clone https://huggingface.co/AdrianKs/kgt5-context-descriptions-wikidata5m
 
-python eval.py -m kgt5-context-descriptions-wikidata5m/pytorch_model.bin -c kgt5-context-descriptions-wikidata5m/config.yaml
+python eval.py -m kgt5-context-descriptions-wikidata5m/model.safetensors -c kgt5-context-descriptions-wikidata5m/config.yaml
 ```
 
 
